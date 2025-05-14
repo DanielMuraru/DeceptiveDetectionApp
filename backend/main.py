@@ -37,8 +37,8 @@ def get_bert_embedding_cached(text):
         outputs = model(**inputs)
         hidden_states = outputs.hidden_states
         last_hidden_state = hidden_states[-1]  # Ultimul layer
-        embedding = last_hidden_state.mean(dim=1).squeeze()
-
+        #embedding = last_hidden_state.mean(dim=1).squeeze()
+        embedding = last_hidden_state[:, 0, :].squeeze()
     # Mută embedding-ul înapoi pe CPU pentru cache
     return embedding.cpu().numpy()
 
